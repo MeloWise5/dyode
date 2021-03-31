@@ -18,11 +18,10 @@ The directions were:
 
 
     1. Figma Design File & Assets Here (Assets can be downloaded directly from Figma)
-
-Requirements:
-    Must be mobile first and responsive.
-    Use a modern javascript framework for precompiling javascript and scss. ie: Vue, React, Gulp. 
-    Use of SASS with mobile first practices.
-    Other than the listed technologies, feel free to use any other frameworks or libraries you see fit. Bootstrap is not allowed!
-    Provide a github link to your test and provide public preview URL for quick access.
-    Use Heroku, Netlify or other cloud hosting service to show your work - do not provide build link but instead a public URL and do not use Shopify 
+    2. Requirements:
+        1. Must be mobile first and responsive.
+        2. Use a modern javascript framework for precompiling javascript and scss. ie: Vue, React, Gulp. 
+        3. Use of SASS with mobile first practices.
+        4. Other than the listed technologies, feel free to use any other frameworks or libraries you see fit. Bootstrap is not allowed!
+        5. Provide a github link to your test and provide public preview URL for quick access.
+            1. Use Heroku, Netlify or other cloud hosting service to show your work - do not provide build link but instead a public URL and do not use Shopify 
