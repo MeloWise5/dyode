@@ -5,10 +5,7 @@
 const toggleSearch = () => {
     const hamburger = document.getElementById('hamburger')
     const style = getComputedStyle(hamburger)
-    if(style.display === 'none'){
-        // If the hamburger is not showing we are on desktop.
-    }else{
-        // if the hamburger is showing. We are using mobile.
+
         const search_bar = document.getElementById('mobile_search_bar')
         const style_search_bar = getComputedStyle(search_bar)
         if(style_search_bar.display === 'none'){
@@ -18,7 +15,7 @@ const toggleSearch = () => {
             // hide the search bar
             search_bar.style.display = 'none'
         }
-    }
+    
 }
 const toggleNavigationMobile = () => {
     
@@ -28,9 +25,11 @@ const toggleNavigationMobile = () => {
         // show the search bar
         mobile_menu_container.style.display = 'block'
         //limit scrolling by setting main div to overflow hidden.
+        document.querySelector('body').style.overflow='hidden'
     }else{
         // hide the search bar
         mobile_menu_container.style.display = 'none'
+        document.querySelector('body').style.overflow='auto'
     }
     
 }
@@ -46,15 +45,15 @@ const mobile_close_btn = document.getElementById('mobile_close_btn')
 mobile_close_btn.addEventListener('click', toggleNavigationMobile)
 
 //Accordion Slide
-const nav_sections = document.querySelectorAll('.nav_section')
+const nav_sections = document.querySelectorAll('.mobile_navigation_header')
 for (const nav_section of nav_sections) {  
     nav_section.addEventListener('click',()=>{
-        if(nav_section.children[1].classList.contains('open')) {
-            nav_section.children[0].children[1].classList.replace('arrow_open','arrow_close')
-            nav_section.children[1].classList.replace('open','close')
+        if(nav_section.parentElement.children[1].classList.contains('open')) {
+            nav_section.children[1].classList.replace('arrow_open','arrow_close')
+            nav_section.parentElement.children[1].classList.replace('open','close')
           }else{
-            nav_section.children[0].children[1].classList.replace('arrow_close','arrow_open')
-            nav_section.children[1].classList.replace('close','open')
+            nav_section.children[1].classList.replace('arrow_close','arrow_open')
+            nav_section.parentElement.children[1].classList.replace('close','open')
           }
         
     })
@@ -62,8 +61,7 @@ for (const nav_section of nav_sections) {
 //Footer Accordion Slide
 const footer_nav_sections = document.querySelector('.footer_nav')
 for (const nav_section of footer_nav_sections.children) {  
-    nav_section.addEventListener('click',()=>{
-        console.log(nav_section)
+    nav_section.children[0].addEventListener('click',()=>{
         if(nav_section.children[1].classList.contains('open')) {
             nav_section.children[0].children[1].innerHTML = '-'
             nav_section.children[1].classList.replace('open','close')
@@ -73,17 +71,26 @@ for (const nav_section of footer_nav_sections.children) {
           }
     })
 }
-// // add event listener to close the filters side bar.
-// const hide_filter_btn = document.querySelector('.filter_header h2')
-// const btn_txt = document.querySelector('.filter_header h2 span')
-// hide_filter_btn.addEventListener('click',(evt) => {
-//   evt.stopPropagation()
-//   const container = document.getElementById('accordion_container')
-//   if(container.classList.contains('accordion_container_closed')) {
-//     btn_txt.innerHTML = '~ hide'
-//     container.classList.replace('accordion_container_closed','accordion_container_open')
-//   }else{
-//     btn_txt.innerHTML = '~ open'
-//     container.classList.replace('accordion_container_open','accordion_container_closed')
-//   }
-// })
+
+
+// Main Navigation DESKTOP
+const desktop_nav = document.querySelector('.nav_bar_center ul');
+for (const d_nav of desktop_nav.children){
+    d_nav.addEventListener('click',()=>{
+        const mega_menu = document.querySelector('.mega_menu_container')
+        if(d_nav.children[0].dataset.mega){
+            const mega_style_display = getComputedStyle(mega_menu)
+            if(mega_menu.style.display === 'none' || mega_style_display.display ==='none'){
+                mega_menu.style.display = 'flex'
+            }else{
+                mega_menu.style.display = 'none'
+            }
+        }else{
+            mega_menu.style.display = 'none'
+        }
+        for (const d_nav of desktop_nav.children){
+            d_nav.children[0].classList.remove('nav_bar_active')
+        }
+        d_nav.children[0].classList.add('nav_bar_active')
+    })
+}
