@@ -94,3 +94,68 @@ for (const d_nav of desktop_nav.children){
         d_nav.children[0].classList.add('nav_bar_active')
     })
 }
+
+// product carousel 
+const arrow_prev = document.querySelector('.carousel_container .arrow_prev')
+const arrow_next = document.querySelector('.carousel_container .arrow_next')
+const carousel_container = document.querySelector('.carousel_container .carousel_product_container')
+const slider = document.querySelector('.carousel_container .carousel_product_container .slider')
+
+arrow_prev.addEventListener('click',() => {
+    let slider_left = slider.style.marginLeft
+    let slider_left_adj = Math.floor(slider_left.replace('px',''))
+    console.log(slider_left_adj)
+    if(slider_left_adj < 0){
+        const carousel_container_width = carousel_container.offsetWidth;
+        const slider_width = slider.offsetWidth;
+        const adjust_amount = slider.children[0].offsetWidth
+        let newNum = Math.floor(slider_left_adj+adjust_amount) 
+        slider.style.marginLeft = newNum+ 'px'
+
+
+        if(arrow_next.style.color === 'rgb(238, 238, 238)'){
+            arrow_next.style.color = '#000000'
+            arrow_next.style.cursor = 'pointer'
+        }
+        arrow_prev.style.color = '#000000'
+        arrow_prev.style.cursor = 'pointer'
+    }else{
+        arrow_prev.style.color = '#eeeeee'
+        arrow_prev.style.cursor = 'default'
+    }
+})
+arrow_next.addEventListener('click',() => {
+    // find the number of items
+    const item_amount = slider.children.length
+    // find how wide each is.
+    const item_width = -(slider.children[0].offsetWidth)
+    // mobile or not. tells how many clicks we can do
+    const carousel_width = carousel_container.offsetWidth
+    let slide_amount
+    if(carousel_width===1200){
+        slide_amount = item_amount - 4
+    }else if(carousel_width===300){
+        slide_amount = item_amount - 2
+    }
+    let slider_left = slider.style.marginLeft
+    let slider_left_adj = Math.floor(slider_left.replace('px',''))
+    const slide_amount_px = Math.floor(slide_amount*item_width)
+
+    if(arrow_prev.style.color === 'rgb(238, 238, 238)'){
+        arrow_prev.style.color = '#000000'
+        arrow_prev.style.cursor = 'pointer'
+    }
+    if(slider_left_adj > slide_amount_px){
+        //console.log(slider_left)
+        let newNum = Math.floor(slider_left_adj+item_width) 
+        slider.style.marginLeft = newNum+ 'px'
+        arrow_next.style.color = '#000000'
+        arrow_next.style.cursor = 'pointer'
+    }else{
+        arrow_next.style.color = '#eeeeee'
+        arrow_next.style.cursor = 'default'
+    }
+    
+    
+
+})
